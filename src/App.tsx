@@ -9,19 +9,44 @@ const MyRadio: React.FC<MyRadioProps> = ({ label, ...props }) => {
   return <FormControlLabel {...field} control={<Radio />} label={label} />;
 };
 
+const MyTextField: React.FC<FieldAttributes<{}>> = ({ placeholder, ...props }) => {
+  const [field, meta] = useField<{}>(props);
+  const errorText = meta.error && meta.touched ? meta.error : "";
+  return (
+    <TextField
+      placeholder={placeholder}
+      {...field}
+      helperText={errorText}
+      error={!!errorText}
+    />
+  );
+};
+
 function App() {
   return (
     <>
       <Formik
-        initialValues={{ firstName: "Gytis", lastName: "Leo", isTall: false, cookies: [], yogurt: [] }}
+        initialValues={{ firstName: "Gytis", lastName: "Leo", isTall: false, cookies: [], yogurt: "" }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
           console.log("Submit: ", data);
           setSubmitting(false);
         }}
+        validate={(values) => {
+          const errors: Record<string, string> = {};
+
+          if (values.firstName.includes('bob')) {
+            errors.firstName = 'no bob';
+          }
+          return errors;
+        }}
       >
         {({ values, isSubmitting }) => (
           <Form>
+            <MyTextField
+              placeholder="first name"
+              name="firstName"
+            />
             <div>
               <Field
                 placeholder="first name"
