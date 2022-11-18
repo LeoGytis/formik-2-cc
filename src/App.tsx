@@ -26,9 +26,9 @@ function App() {
   return (
     <>
       <Formik
-        initialValues={{ firstName: "Gytis", lastName: "Leo", isTall: false, cookies: [], yogurt: "" }}
+        initialValues={{ firstName: "", lastName: "", isTall: false, cookies: [], yogurt: "" }}
         onSubmit={(data, { setSubmitting }) => {
-          setSubmitting(true);
+          setSubmitting(true);    // kad nepaspaustu submit daug kartu.
           console.log("Submit: ", data);
           setSubmitting(false);
         }}
@@ -48,12 +48,6 @@ function App() {
               name="firstName"
             />
             <div>
-              <Field
-                placeholder="first name"
-                name="firstName"
-                type="input"
-                as={TextField}
-              />
               <Field
                 placeholder="last name"
                 name="lastName"

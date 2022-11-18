@@ -3,7 +3,31 @@ import { Formik, Form } from "formik";
 import { TextField } from "./TextField";
 import * as Yup from "yup";
 
-export const Signup = () => {};
+export const Signup = () => {
+  return (
+    <Formik
+      initialValues={{
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      }}
+    >
+      {(formik) => {
+        <div>
+          <h1 className="my-4 font-weight-bold .display-4">Sign Up</h1>
+          <Form>
+            <TextField label="First Name" name="firstName" type="text" />
+            {/* <TextField label="Last Name" name="lastName" type="text" />
+            <TextField label="Email" name="email" type="email" />
+            <TextField label="password" name="password" type="password" /> */}
+          </Form>
+        </div>;
+      }}
+    </Formik>
+  );
+};
 
 // export const Signup = () => {
 //   const validate = Yup.object({
